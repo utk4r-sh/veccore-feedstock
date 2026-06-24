@@ -26,9 +26,9 @@ requirements:
     - ${{ compiler("cxx") }}
     - ${{ stdlib("c") }}
     - cmake
-    - gtest
     - ninja
   host:
+    - gtest
     - vector-classes
   ignore_run_exports:
     # Header-only package: no compiled artifacts ship, so the C++ runtime and C
