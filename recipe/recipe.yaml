@@ -11,13 +11,13 @@ source:
 
 build:
   script:
-    - cmake -S . -B build -G Ninja -DVC=ON -DUMESIMD=OFF -DCUDA=OFF -DBUILD_TESTING=ON -DBUILD_BENCHMARKS=OFF -DBUILD_VC=OFF -DBUILD_UMESIMD=OFF ${CXX_STANDARD_CMAKE_FLAG} ${CMAKE_ARGS}
+    - cmake -S . -B build -G Ninja -DVC=ON -DUMESIMD=OFF -DCUDA=OFF -DBUILD_TESTING=ON -DBUILD_BENCHMARKS=OFF -DBUILD_VC=OFF -DBUILD_UMESIMD=OFF ${CMAKE_ARGS}
     - ninja -C build -j${CPU_COUNT}
     # Test binaries are built for the target; only run them on native builds.
     - if: build_platform == target_platform
       then: ctest --test-dir build --output-on-failure
     - ninja -C build install
-  number: 0
+  number: 1
   skip:
     - win
 
@@ -26,9 +26,9 @@ requirements:
     - ${{ compiler("cxx") }}
     - ${{ stdlib("c") }}
     - cmake
-    - gtest
     - ninja
   host:
+    - gtest
     - vector-classes
   ignore_run_exports:
     # Header-only package: no compiled artifacts ship, so the C++ runtime and C
